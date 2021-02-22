@@ -15,5 +15,7 @@ namespace PaymentProvider.Domains.DataAggregate.Models
         public string PaymentConfiguration { get; set; }
         public string PageAction { get; set; }
         public string Language { get; set; }
+        public string Designation { get; set; }
+        public string Custom { get; set; }
     }
 }

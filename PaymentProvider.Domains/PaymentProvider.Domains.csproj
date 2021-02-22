@@ -6,12 +6,14 @@
 
   <ItemGroup>
     <Folder Include="DataAggregate\Abstrations\" />
-    <Folder Include="Enums\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Logs\" />
-    <Folder Include="Options\" />
     <Folder Include="PaymentAggregate\Models\" />
     <Folder Include="PaymentAggregate\Abstrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
 </Project>

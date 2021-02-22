@@ -9,5 +9,9 @@
     <Folder Include="Requests\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PaymentProvider.Domains\PaymentProvider.Domains.csproj" />
+  </ItemGroup>
+
 
 </Project>

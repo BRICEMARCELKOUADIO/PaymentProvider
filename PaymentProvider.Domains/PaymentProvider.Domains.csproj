@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DataAggregate\Abstrations\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Logs\" />
+    <Folder Include="Options\" />
+    <Folder Include="PaymentAggregate\Models\" />
+    <Folder Include="PaymentAggregate\Abstrations\" />
+  </ItemGroup>
+
+</Project>

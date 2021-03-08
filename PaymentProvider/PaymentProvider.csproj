@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Requests\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PaymentProvider.Domains\PaymentProvider.Domains.csproj" />
+    <ProjectReference Include="..\PaymentProvider.Infrastructure\PaymentProvider.Infrastructure.csproj" />
   </ItemGroup>
 
 

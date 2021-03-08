@@ -6,7 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PaymentProvider.Domains.DataAggregate.Abstrations;
 using PaymentProvider.Domains.Options;
+using PaymentProvider.Infrastructure.PaymentService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,8 @@ namespace PaymentProvider
             services.AddControllers();
 
             services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseCongiuration"));
+
+            services.AddScoped<IPaiement, PaiementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

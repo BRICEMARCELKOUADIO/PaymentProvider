@@ -30,7 +30,7 @@ namespace PaymentProvider
         {
             services.AddControllers();
 
-            services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseCongiuration"));
+            services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseConguration"));
 
             // add services
             services.AddScoped<IPaiement, PaiementService>();

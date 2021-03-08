@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PaymentProvider.Infrastructure.PaymentService.Dto
 {
-    public class PaymentDto
+    public class PaiementDto
     {
     }
 }

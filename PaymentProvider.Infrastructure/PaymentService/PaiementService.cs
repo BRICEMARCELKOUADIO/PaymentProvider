@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace PaymentProvider.Infrastructure.PaymentService
 {
-    public class PaymentService : IPaiement
+    public class PaiementService : IPaiement
     {
         private readonly PaiementOptions _paiementOptions;
 
-        public PaymentService(PaiementOptions paiementOptions)
+        public PaiementService(PaiementOptions paiementOptions)
         {
             _paiementOptions = _paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
         }
-        public Task<PaiementResult<string>> GetPaiementUrl(string PhoneNumber)
+        public Task<PaiementResult<string>> GetPaiementUrl()
         {
             throw new Exception();
         }

@@ -26,9 +26,10 @@ namespace PaymentProvider.Controllers
             try
             {
                 var id = "0";
-                await _paiement.GetSignature(id);
 
-                return Ok();
+                var response  = await _paiement.GetSignature(id);
+
+                return Ok(response);
             }
             catch (Exception ex)
             {

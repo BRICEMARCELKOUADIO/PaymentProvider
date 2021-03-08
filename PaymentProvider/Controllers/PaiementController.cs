@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using PaymentProvider.Domains.DataAggregate.Abstrations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,11 @@ namespace PaymentProvider.Controllers
     [ApiController]
     public class PaiementController : Controller
     {
-        public PaiementController()
-        {
 
+        private readonly IPaiement _paiement;
+        public PaiementController(IPaiement paiement)
+        {
+            _paiement = paiement ?? throw new ArgumentNullException(nameof(paiement));
         }
 
         [Route("GetSignature")]
@@ -21,11 +25,14 @@ namespace PaymentProvider.Controllers
         {
             try
             {
-                
+                var id = "0";
+                await _paiement.GetSignature(id);
+
+                return Ok();
             }
             catch (Exception ex)
             {
-                
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

@@ -16,7 +16,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
 
         public PaymentService(PaiementOptions paiementOptions)
         {
-            _paiementOptions = paiementOptions;
+            _paiementOptions = _paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
         }
         public Task<PaiementResult<string>> GetPaiementUrl(string PhoneNumber)
         {

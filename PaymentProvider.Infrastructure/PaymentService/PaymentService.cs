@@ -20,7 +20,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
         }
         public Task<PaiementResult<string>> GetPaiementUrl(string PhoneNumber)
         {
-            
+            throw new Exception();
         }
 
         public async Task<PaiementResult<string>> GetSignature(string transactionId)

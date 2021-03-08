@@ -33,7 +33,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 paiementDatet.Add(new KeyValuePair<string, string>("cpm_site_id", _paiementOptions.SiteID));
                 paiementDatet.Add(new KeyValuePair<string, string>("cpm_trans_id", transactionId));
 
-                var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SiteID) { Content = new FormUrlEncodedContent(paiementDatet) };
+                var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementDatet) };
 
                 var res = await client.SendAsync(req);
 

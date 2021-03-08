@@ -14,6 +14,9 @@ namespace PaymentProvider.Domains.Options
         [JsonProperty("ApiKey")]
         public string ApiKey { get; set; }
 
+        [JsonProperty("SignatureUrl")]
+        public string SignatureUrl { get; set; }
+
         [JsonProperty("PaymentConfiguration")]
         public string PaymentConfiguration { get; set; }
 

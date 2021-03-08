@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DataAggregate\Abstrations\" />
     <Folder Include="Logs\" />
     <Folder Include="PaymentAggregate\Models\" />
     <Folder Include="PaymentAggregate\Abstrations\" />

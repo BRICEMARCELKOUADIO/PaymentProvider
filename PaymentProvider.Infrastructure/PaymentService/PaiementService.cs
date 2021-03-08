@@ -1,5 +1,5 @@
-﻿using PaymentProvider.Domains.DataAggregate.Abstrations;
-using PaymentProvider.Domains.DataAggregate.Models;
+﻿using PaymentProvider.Domains.PaiementAggregate.Abstrations;
+using PaymentProvider.Domains.PaiementAggregate.Models;
 using PaymentProvider.Domains.Enums;
 using PaymentProvider.Domains.Options;
 using System;

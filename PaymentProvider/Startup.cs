@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PaymentProvider.Domains.DataAggregate.Abstrations;
+using PaymentProvider.Domains.PaiementAggregate.Abstrations;
 using PaymentProvider.Domains.Options;
 using PaymentProvider.Infrastructure.PaymentService;
 using System;

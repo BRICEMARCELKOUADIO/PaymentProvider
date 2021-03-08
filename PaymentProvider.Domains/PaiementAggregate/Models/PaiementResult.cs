@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PaymentProvider.Domains.DataAggregate.Models
+namespace PaymentProvider.Domains.PaiementAggregate.Models
 {
     public class PaiementResult<T>
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PaymentProvider.Domains.DataAggregate.Abstrations;
+using PaymentProvider.Domains.PaiementAggregate.Abstrations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

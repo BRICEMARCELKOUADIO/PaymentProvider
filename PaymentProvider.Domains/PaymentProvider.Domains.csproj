@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Logs\" />
-    <Folder Include="PaymentAggregate\Models\" />
-    <Folder Include="PaymentAggregate\Abstrations\" />
   </ItemGroup>
 
   <ItemGroup>

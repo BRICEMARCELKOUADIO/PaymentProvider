@@ -25,6 +25,9 @@ namespace PaymentProvider.Domains.Options
         [JsonProperty("PageAction")]
         public string PageAction { get; set; }
 
+        [JsonProperty("PaiementInfosUrl")]
+        public string PaiementInfosUrl { get; set; }
+
         [JsonProperty("Language")]
         public string Language { get; set; }
 

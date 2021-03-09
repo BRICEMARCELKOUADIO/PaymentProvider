@@ -55,7 +55,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 }
                 else
                 {
-                    return new PaiementResult<string>() { ResultCode = StatusCode.SignatureFailed };
+                    return new PaiementResult<string>() { ResultCode = StatusCode.Failed, Message = "" };
                 }
                 
             }

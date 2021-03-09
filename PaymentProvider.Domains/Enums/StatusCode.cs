@@ -8,6 +8,5 @@ namespace PaymentProvider.Domains.Enums
     {
         Success,
         Failed,
-        SignatureFailed = 609,
     }
 }

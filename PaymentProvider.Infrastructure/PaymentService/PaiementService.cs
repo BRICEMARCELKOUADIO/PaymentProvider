@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace PaymentProvider.Infrastructure.PaymentService
 {
@@ -14,7 +15,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
     {
         private readonly PaiementOptions _paiementOptions;
 
-        public PaiementService(PaiementOptions paiementOptions)
+        public PaiementService(IOptions<PaiementOptions> paiementOptions)
         {
             _paiementOptions = paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
         }

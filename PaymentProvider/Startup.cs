@@ -34,7 +34,7 @@ namespace PaymentProvider
 
             services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseConguration"));
 
-            services.AddSingleton<IPaiement, PaiementService>();
+            services.AddScoped<IPaiement, PaiementService>();
 
             services.AddSwaggerGen(c =>
             {

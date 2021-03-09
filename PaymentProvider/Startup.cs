@@ -32,20 +32,20 @@ namespace PaymentProvider
             services.AddControllers();
 
 
-            services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseConguration"));
+            //services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseConguration"));
 
-            services.AddSingleton<IPaiement, PaiementService>();
+            //services.AddSingleton<IPaiement, PaiementService>();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "PaymentProvider API",
+                    Title = "Payment Provider API",
                     Version = "V1",
                     Description = "Description for the API goes here.",
                     Contact = new OpenApiContact
                     {
-                        Name = "PaymentProvider",
+                        Name = "Payment Provider",
                         Email = string.Empty,
                         Url = new Uri("https://PaymentProvider.com/"),
                     },

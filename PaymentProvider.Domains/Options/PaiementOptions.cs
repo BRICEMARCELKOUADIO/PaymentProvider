@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using PaymentProvider.Domains.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +27,9 @@ namespace PaymentProvider.Domains.Options
 
         [JsonProperty("Language")]
         public string Language { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Currency Currency { get; set; }
 
         [JsonProperty("PhonePrefix")]
         public string PhonePrefix { get; set; }

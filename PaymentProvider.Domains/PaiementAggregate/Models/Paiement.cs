@@ -6,7 +6,7 @@ namespace PaymentProvider.Domains.PaiementAggregate.Models
 {
     public class Paiement
     {
-        public string Amount { get; set; }
+        public decimal Amount { get; set; }
         public string Currency { get; set; }
         public string SiteID { get; set; }
         public string ApiKey { get; set; }

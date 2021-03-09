@@ -28,11 +28,19 @@ namespace PaymentProvider.Infrastructure.PaymentService
             try
             {
                 var client = new HttpClient();
+
                 var paiementDatet = new List<KeyValuePair<string, string>>();
-                paiementDatet.Add(new KeyValuePair<string, string>("cpm_amount", paiement.Amount));
+
+                paiementDatet.Add(new KeyValuePair<string, string>("cpm_amount", paiement.Amount.ToString()));
+                paiementDatet.Add(new KeyValuePair<string, string>("cpm_currency", _paiementOptions.Currency.ToString()));
                 paiementDatet.Add(new KeyValuePair<string, string>("apikey", _paiementOptions.ApiKey));
                 paiementDatet.Add(new KeyValuePair<string, string>("cpm_site_id", _paiementOptions.SiteID));
                 paiementDatet.Add(new KeyValuePair<string, string>("cpm_trans_id", paiement.TransactionId));
+                paiementDatet.Add(new KeyValuePair<string, string>("cpm_trans_date", paiement.TansactionDate.ToString()));
+                paiementDatet.Add(new KeyValuePair<string, string>("cpm_page_action", _paiementOptions.PageAction));
+                paiementDatet.Add(new KeyValuePair<string, string>("cpm_language", _paiementOptions.Language));
+                paiementDatet.Add(new KeyValuePair<string, string>("cpm_payment_config", _paiementOptions.PaymentConfiguration));
+
                 var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementDatet) };
 
                 var res = await client.SendAsync(req);

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PaymentProvider.Controllers
 {
-    [Route("api/paiement")]
+    [Route("api/Paiement")]
     [ApiController]
     public class PaiementController : ControllerBase
     {
@@ -22,11 +22,11 @@ namespace PaymentProvider.Controllers
 
         [Route("GetSignature")]
         [HttpGet]
-        public async Task<IActionResult> GetSignatureAsync()
+        public async Task<IActionResult> GetSignatureAsync(decimal amount)
         {
             try
             {
-                Paiement paiement = new Paiement();
+                Paiement paiement = new Paiement() { Amount = amount };
 
                 var response  = await _paiement.GetSignature(paiement);
 

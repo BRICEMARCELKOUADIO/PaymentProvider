@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PaymentProvider.Controllers
 {
-    [Route("api/Paiement")]
+    [Route("api/paiement")]
     [ApiController]
     public class PaiementController : ControllerBase
     {

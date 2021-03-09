@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PaymentProvider.Domains\PaymentProvider.Domains.csproj" />
     <ProjectReference Include="..\PaymentProvider.Infrastructure\PaymentProvider.Infrastructure.csproj" />
   </ItemGroup>

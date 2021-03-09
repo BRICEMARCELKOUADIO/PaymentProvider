@@ -8,7 +8,7 @@ namespace PaymentProvider.Domains.PaiementAggregate.Abstrations
 {
     public interface IPaiement
     {
-        Task<PaiementResult<string>> GetSignature(string transactionId);
+        Task<PaiementResult<string>> GetSignature(Paiement paiement);
         Task<PaiementResult<string>> GetPaiementUrl();
     }
 }

@@ -30,10 +30,10 @@ namespace PaymentProvider
         {
             services.AddControllers();
 
+
             services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseConguration"));
 
-            // add services
-            services.AddScoped<IPaiement, PaiementService>();
+            services.AddSingleton<IPaiement, PaiementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -16,23 +16,23 @@ namespace PaymentProvider.Infrastructure.PaymentService
 
         public PaiementService(PaiementOptions paiementOptions)
         {
-            _paiementOptions = _paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
+            _paiementOptions = paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
         }
         public Task<PaiementResult<string>> GetPaiementUrl()
         {
             throw new Exception();
         }
 
-        public async Task<PaiementResult<string>> GetSignature(string transactionId)
+        public async Task<PaiementResult<string>> GetSignature(Paiement paiement)
         {
             try
             {
                 var client = new HttpClient();
                 var paiementDatet = new List<KeyValuePair<string, string>>();
+                paiementDatet.Add(new KeyValuePair<string, string>("cpm_amount", paiement.Amount));
                 paiementDatet.Add(new KeyValuePair<string, string>("apikey", _paiementOptions.ApiKey));
                 paiementDatet.Add(new KeyValuePair<string, string>("cpm_site_id", _paiementOptions.SiteID));
-                paiementDatet.Add(new KeyValuePair<string, string>("cpm_trans_id", transactionId));
-
+                paiementDatet.Add(new KeyValuePair<string, string>("cpm_trans_id", paiement.TransactionId));
                 var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementDatet) };
 
                 var res = await client.SendAsync(req);

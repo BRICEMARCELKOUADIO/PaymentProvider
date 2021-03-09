@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PaymentProvider.Domains.PaiementAggregate.Abstrations;
+using PaymentProvider.Domains.PaiementAggregate.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace PaymentProvider.Controllers
 {
     [Route("api/paiement")]
     [ApiController]
-    public class PaiementController : Controller
+    public class PaiementController : ControllerBase
     {
 
         private readonly IPaiement _paiement;
@@ -25,9 +26,9 @@ namespace PaymentProvider.Controllers
         {
             try
             {
-                var id = "0";
+                Paiement paiement = new Paiement();
 
-                var response  = await _paiement.GetSignature(id);
+                var response  = await _paiement.GetSignature(paiement);
 
                 return Ok(response);
             }

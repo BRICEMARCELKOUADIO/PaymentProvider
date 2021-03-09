@@ -32,9 +32,9 @@ namespace PaymentProvider
             services.AddControllers();
 
 
-            //services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseConguration"));
+            services.Configure<PaiementOptions>(Configuration.GetSection("PaymentBaseConguration"));
 
-            //services.AddSingleton<IPaiement, PaiementService>();
+            services.AddSingleton<IPaiement, PaiementService>();
 
             services.AddSwaggerGen(c =>
             {

@@ -8,8 +8,5 @@ namespace PaymentProvider.Domains.Enums
     {
         Success,
         Failed,
-        SUCCES = 00,
-        PAYMENT_FAILED = 600,
-        MERCHANT_NOT_FOUND = 601,
     }
 }

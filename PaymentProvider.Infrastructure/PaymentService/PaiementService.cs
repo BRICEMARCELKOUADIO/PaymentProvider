@@ -42,21 +42,22 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 paiementData.Add(new KeyValuePair<string, string>("cpm_trans_date", DateTime.Now.ToString()));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_page_action", _paiementOptions.PageAction));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_language", _paiementOptions.Language));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_version", _paiementOptions.ApiVersion));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_payment_config", _paiementOptions.PaymentConfiguration));
 
                 var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementData) };
 
                 var res = await client.SendAsync(req);
 
-                var response = await res.Content.ReadAsStringAsync();
-
                 if (res.IsSuccessStatusCode)
                 {
+                    var response = await res.Content.ReadAsStringAsync();
+
                     var result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
 
                     return new PaiementResult<string>() 
                     { 
-                        ResultCode = (result.status.code != "00") ? StatusCode.Failed : StatusCode.SUCCES , Response = result.status.message 
+                        ResultCode = (result.status.code != "00") ? StatusCode.Failed : StatusCode.Success , Response = result.status.message 
                     };
                 }
                 else

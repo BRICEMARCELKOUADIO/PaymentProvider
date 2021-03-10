@@ -30,6 +30,9 @@ namespace PaymentProvider.Domains.Options
 
         [JsonProperty("Language")]
         public string Language { get; set; }
+        
+        [JsonProperty("ApiVersion")]
+        public string ApiVersion { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public Currency Currency { get; set; }

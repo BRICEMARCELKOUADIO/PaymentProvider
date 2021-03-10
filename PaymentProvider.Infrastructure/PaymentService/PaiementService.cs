@@ -37,14 +37,16 @@ namespace PaymentProvider.Infrastructure.PaymentService
 
                 paiementData.Add(new KeyValuePair<string, string>("cpm_amount", amount.ToString()));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_currency", _paiementOptions.Currency.ToString()));
-                paiementData.Add(new KeyValuePair<string, string>("apikey", _paiementOptions.ApiKey));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_site_id", _paiementOptions.SiteID));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_trans_id", transactionId.ToString()));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_trans_date", DateTime.Now.ToString()));
-                paiementData.Add(new KeyValuePair<string, string>("cpm_page_action", _paiementOptions.PageAction));
-                paiementData.Add(new KeyValuePair<string, string>("cpm_language", _paiementOptions.Language));
-                paiementData.Add(new KeyValuePair<string, string>("cpm_version", _paiementOptions.ApiVersion));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_payment_config", _paiementOptions.PaymentConfiguration));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_page_action", _paiementOptions.PageAction));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_version", _paiementOptions.ApiVersion));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_language", _paiementOptions.Language));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_designation", _paiementOptions.PaymentConfiguration));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_custom", ""));
+                paiementData.Add(new KeyValuePair<string, string>("apikey", _paiementOptions.ApiKey));
 
                 var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementData) };
 
@@ -53,7 +55,6 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 if (res.IsSuccessStatusCode)
                 {
                     var response = await res.Content.ReadAsStringAsync();
-
                     var result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
 
                     return new PaiementResult<string>() 

@@ -28,7 +28,6 @@ namespace PaymentProvider.Controllers
         {
             try
             {
-
                 var response  = await _paiement.GetSignature(amount, transactionId);
 
                 if (response.ResultCode != 0)

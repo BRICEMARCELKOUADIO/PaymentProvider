@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using PaymentProvider.Infrastructure.Dto;
 
 namespace PaymentProvider.Infrastructure.PaymentService
 {
@@ -50,22 +52,27 @@ namespace PaymentProvider.Infrastructure.PaymentService
 
                 if (res.IsSuccessStatusCode)
                 {
-                    //Deserialisation des données
+                    var PaiementResult = new PaiementResult<string>();
 
+                    if (response.Contains("status"))
+                    {
+                        var result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
 
+                        return new PaiementResult<string>() { ResultCode = StatusCode.Success, Response = "" };
+                    }
 
-                    return new PaiementResult<string>() { ResultCode = StatusCode.Success,Response = "" };
+                    return new PaiementResult<string>() { ResultCode = StatusCode.Success,Response = response };
                 }
                 else
                 {
-                    return new PaiementResult<string>() { ResultCode = StatusCode.Failed, Message = "" };
+                    return new PaiementResult<string>() { ResultCode = StatusCode.Failed,};
                 }
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return new PaiementResult<string>() { ResultCode = StatusCode.Failed, Message = ex.Message };
             }
         }
     }

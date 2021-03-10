@@ -20,14 +20,16 @@ namespace PaymentProvider.Controllers
             _paiement = paiement ?? throw new ArgumentNullException(nameof(paiement));
         }
 
-        [Route("GetSignature")]
-        [HttpGet]
+        [HttpGet("GetSignature")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetSignatureAsync(decimal amount, int transactionId)
         {
             try
             {
 
-                var response  = await _paiement.GetSignature(amount, transactionId);
+                var response  = await _paiement.GetSignature(amount, transactionId);           
 
                 return Ok(response);
             }

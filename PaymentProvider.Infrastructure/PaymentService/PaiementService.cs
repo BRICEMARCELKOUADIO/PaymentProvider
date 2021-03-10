@@ -46,6 +46,8 @@ namespace PaymentProvider.Infrastructure.PaymentService
 
                 var res = await client.SendAsync(req);
 
+                var response = await res.Content.ReadAsStringAsync();
+
                 if (res.IsSuccessStatusCode)
                 {
                     //Deserialisation des données

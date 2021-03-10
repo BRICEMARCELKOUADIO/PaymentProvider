@@ -29,7 +29,12 @@ namespace PaymentProvider.Controllers
             try
             {
 
-                var response  = await _paiement.GetSignature(amount, transactionId);           
+                var response  = await _paiement.GetSignature(amount, transactionId);
+
+                if (response.ResultCode != 0)
+                {
+                    return BadRequest(response);
+                }
 
                 return Ok(response);
             }

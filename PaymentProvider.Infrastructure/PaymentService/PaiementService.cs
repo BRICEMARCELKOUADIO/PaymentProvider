@@ -52,14 +52,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var PaiementResult = new PaiementResult<string>();
-
-                    if (response.Contains("status"))
-                    {
-                        var result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
-
-                        return new PaiementResult<string>() { ResultCode = StatusCode.Success, Response = "" };
-                    }
+                    var result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
 
                     return new PaiementResult<string>() { ResultCode = StatusCode.Success,Response = response };
                 }
@@ -67,11 +60,9 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 {
                     return new PaiementResult<string>() { ResultCode = StatusCode.Failed,};
                 }
-                
             }
             catch (Exception ex)
             {
-
                 return new PaiementResult<string>() { ResultCode = StatusCode.Failed, Message = ex.Message };
             }
         }

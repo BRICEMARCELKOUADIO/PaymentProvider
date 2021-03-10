@@ -54,7 +54,10 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 {
                     var result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
 
-                    return new PaiementResult<string>() { ResultCode = StatusCode.Success, Response = result.status.message };
+                    return new PaiementResult<string>() 
+                    { 
+                        ResultCode = (result.status.code != "00") ? StatusCode.Failed : StatusCode.SUCCES , Response = result.status.message 
+                    };
                 }
                 else
                 {

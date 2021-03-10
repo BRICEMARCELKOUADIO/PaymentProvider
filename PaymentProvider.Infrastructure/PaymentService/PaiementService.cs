@@ -21,6 +21,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
         {
             _paiementOptions = paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
         }
+
         public Task<PaiementResult<string>> GetPaiementUrl()
         {
             throw new Exception();
@@ -69,6 +70,11 @@ namespace PaymentProvider.Infrastructure.PaymentService
             {
                 return new PaiementResult<string>() { ResultCode = StatusCode.Failed, Message = ex.Message };
             }
+        }
+
+        public Task<PaiementResult<string>> GetPaiementInfos(int transactionId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

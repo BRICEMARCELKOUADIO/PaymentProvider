@@ -22,13 +22,12 @@ namespace PaymentProvider.Controllers
 
         [Route("GetSignature")]
         [HttpGet]
-        public async Task<IActionResult> GetSignatureAsync(decimal amount)
+        public async Task<IActionResult> GetSignatureAsync(decimal amount, int transactionId)
         {
             try
             {
-                Paiement paiement = new Paiement() { Amount = amount };
 
-                var response  = await _paiement.GetSignature(paiement);
+                var response  = await _paiement.GetSignature(amount, transactionId);
 
                 return Ok(response);
             }

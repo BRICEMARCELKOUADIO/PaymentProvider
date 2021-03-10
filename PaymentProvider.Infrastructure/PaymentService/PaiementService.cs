@@ -44,12 +44,11 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 paiementData.Add(new KeyValuePair<string, string>("cpm_page_action", _paiementOptions.PageAction));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_version", _paiementOptions.ApiVersion));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_language", _paiementOptions.Language));
-                paiementData.Add(new KeyValuePair<string, string>("cpm_designation", _paiementOptions.PaymentConfiguration));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_designation", "Paiement Rotary"));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_custom", ""));
                 paiementData.Add(new KeyValuePair<string, string>("apikey", _paiementOptions.ApiKey));
 
                 var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementData) };
-
                 var res = await client.SendAsync(req);
 
                 if (res.IsSuccessStatusCode)

@@ -131,7 +131,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 paiementData.Add(new KeyValuePair<string, string>("cpm_site_id", _paiementOptions.SiteID));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_trans_id", transactionId.ToString()));                
 
-                var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementData) };
+                var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.PaiementInfosUrl) { Content = new FormUrlEncodedContent(paiementData) };
                 var res = await client.SendAsync(req);
 
                 if (res.IsSuccessStatusCode)

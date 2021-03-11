@@ -45,7 +45,6 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 paiementData.Add(new KeyValuePair<string, string>("cpm_version", _paiementOptions.ApiVersion));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_language", _paiementOptions.Language));
                 paiementData.Add(new KeyValuePair<string, string>("cpm_designation", "Paiement Rotary"));
-                paiementData.Add(new KeyValuePair<string, string>("cpm_custom", ""));
                 paiementData.Add(new KeyValuePair<string, string>("apikey", _paiementOptions.ApiKey));
 
                 var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementData) };
@@ -54,7 +53,12 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 if (res.IsSuccessStatusCode)
                 {
                     var response = await res.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
+                    StatutSignatureDto result = new StatutSignatureDto();
+
+                    if (response.Contains("status"))
+                        result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
+                    else
+                        result.status = new StatutSignatureDetailDto() { code = "00", message = response };
 
                     return new PaiementResult<string>() 
                     { 

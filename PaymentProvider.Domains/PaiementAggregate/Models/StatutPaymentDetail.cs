@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PaymentProvider.Infrastructure.Dto
+namespace PaymentProvider.Domains.PaiementAggregate.Models
 {
-    public class StatutPaymentDto
-    {
-        public StatutPaymentDetailDto Transaction { get; set; }
-    }
-
-    public class StatutPaymentDetailDto
+    public class StatutPaymentDetail
     {
         public string cpm_amount { get; set; }
         public string cpm_currency { get; set; }

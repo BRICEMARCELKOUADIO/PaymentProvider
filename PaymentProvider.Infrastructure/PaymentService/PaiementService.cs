@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using PaymentProvider.Infrastructure.Dto;
 
 namespace PaymentProvider.Infrastructure.PaymentService
 {
@@ -22,9 +21,54 @@ namespace PaymentProvider.Infrastructure.PaymentService
             _paiementOptions = paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
         }
 
-        public Task<PaiementResult<string>> GetPaiementUrl(decimal amount, int transactionId, string signature)
+        public async Task<PaiementResult<string>> GetPaiementUrl(decimal amount, int transactionId, string signature)
         {
-            throw new Exception();
+            try
+            {
+                var client = new HttpClient();
+
+                var paiementData = new List<KeyValuePair<string, string>>();
+
+                paiementData.Add(new KeyValuePair<string, string>("cpm_amount", amount.ToString()));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_currency", _paiementOptions.Currency.ToString()));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_site_id", _paiementOptions.SiteID));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_trans_id", transactionId.ToString()));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_trans_date", DateTime.Now.ToString()));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_payment_config", _paiementOptions.PaymentConfiguration));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_page_action", _paiementOptions.PageAction));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_version", _paiementOptions.ApiVersion));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_language", _paiementOptions.Language));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_designation", "Paiement Rotary"));
+                paiementData.Add(new KeyValuePair<string, string>("apikey", _paiementOptions.ApiKey));
+
+                var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementData) };
+                var res = await client.SendAsync(req);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = await res.Content.ReadAsStringAsync();
+                    StatutSignature result = new StatutSignature();
+
+                    if (response.Contains("status"))
+                        result = JsonConvert.DeserializeObject<StatutSignature>(response);
+                    else
+                        result.status = new StatutSignatureDetail() { code = "00", message = response };
+
+                    return new PaiementResult<string>()
+                    {
+                        ResultCode = (result.status.code != "00") ? StatusCode.Failed : StatusCode.Success,
+                        Response = result.status.message
+                    };
+                }
+                else
+                {
+                    return new PaiementResult<string>() { ResultCode = StatusCode.Failed, };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new PaiementResult<string>() { ResultCode = StatusCode.Failed, Message = ex.Message };
+            }
         }
 
         public async Task<PaiementResult<string>> GetSignature(decimal amount, int transactionId)
@@ -53,12 +97,12 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 if (res.IsSuccessStatusCode)
                 {
                     var response = await res.Content.ReadAsStringAsync();
-                    StatutSignatureDto result = new StatutSignatureDto();
+                    StatutSignature result = new StatutSignature();
 
                     if (response.Contains("status"))
-                        result = JsonConvert.DeserializeObject<StatutSignatureDto>(response);
+                        result = JsonConvert.DeserializeObject<StatutSignature>(response);
                     else
-                        result.status = new StatutSignatureDetailDto() { code = "00", message = response };
+                        result.status = new StatutSignatureDetail() { code = "00", message = response };
 
                     return new PaiementResult<string>() 
                     { 
@@ -76,9 +120,40 @@ namespace PaymentProvider.Infrastructure.PaymentService
             }
         }
 
-        public Task<PaiementResult<string>> GetPaiementInfos(int transactionId)
+        public async Task<PaiementResult<StatutPayment>> GetPaiementInfos(int transactionId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var client = new HttpClient();
+
+                var paiementData = new List<KeyValuePair<string, string>>();
+
+                paiementData.Add(new KeyValuePair<string, string>("cpm_site_id", _paiementOptions.SiteID));
+                paiementData.Add(new KeyValuePair<string, string>("cpm_trans_id", transactionId.ToString()));                
+
+                var req = new HttpRequestMessage(HttpMethod.Post, _paiementOptions.SignatureUrl) { Content = new FormUrlEncodedContent(paiementData) };
+                var res = await client.SendAsync(req);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = await res.Content.ReadAsStringAsync();
+
+                    var result = JsonConvert.DeserializeObject<StatutPayment>(response);
+
+                    return new PaiementResult<StatutPayment>()
+                    {
+                        ResultCode = (result != null) ? StatusCode.Success : StatusCode.Failed, Response = result
+                    };
+                }
+                else
+                {
+                    return new PaiementResult<StatutPayment>() { ResultCode = StatusCode.Failed, };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new PaiementResult<StatutPayment>() { ResultCode = StatusCode.Failed, Message = ex.Message };
+            }
         }
     }
 }

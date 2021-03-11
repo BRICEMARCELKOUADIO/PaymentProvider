@@ -10,6 +10,6 @@ namespace PaymentProvider.Domains.PaiementAggregate.Abstrations
     {
         Task<PaiementResult<string>> GetSignature(decimal amount, int transactionId);
         Task<PaiementResult<string>> GetPaiementUrl(decimal amount, int transactionId, string signature);
-        Task<PaiementResult<string>> GetPaiementInfos(int transactionId);
+        Task<PaiementResult<StatutPayment>> GetPaiementInfos(int transactionId);
     }
 }

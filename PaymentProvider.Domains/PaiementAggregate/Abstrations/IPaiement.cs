@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PaymentProvider.Domains.PaiementAggregate.Abstrations
 {
-    public interface ipaiement
+    public interface IPaiement
     {
         Task<PaiementResult<string>> GetSignature(decimal amount, int transactionId);
         PaiementResult<string> GetPaiementUrl(decimal amount, int transactionId, string signature, string userId);

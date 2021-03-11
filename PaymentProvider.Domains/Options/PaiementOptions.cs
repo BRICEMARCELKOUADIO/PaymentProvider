@@ -28,6 +28,12 @@ namespace PaymentProvider.Domains.Options
         [JsonProperty("PaiementInfosUrl")]
         public string PaiementInfosUrl { get; set; }
 
+        [JsonProperty("PaiementUrl")]
+        public string PaiementUrl { get; set; }
+
+        [JsonProperty("NotificationUrl")]
+        public string NotificationUrl { get; set; }
+
         [JsonProperty("Language")]
         public string Language { get; set; }
         

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PaymentProvider.Domains.PaiementAggregate.Abstrations
 {
-    public interface IPaiement
+    public interface ipaiement
     {
         Task<PaiementResult<string>> GetSignature(decimal amount, int transactionId);
-        Task<PaiementResult<string>> GetPaiementUrl(decimal amount, int transactionId, string signature);
+        PaiementResult<string> GetPaiementUrl(decimal amount, int transactionId, string signature, string userId);
         Task<PaiementResult<StatutPayment>> GetPaiementInfos(int transactionId);
     }
 }

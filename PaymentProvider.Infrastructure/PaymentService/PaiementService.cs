@@ -22,7 +22,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
             _paiementOptions = paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
         }
 
-        public Task<PaiementResult<string>> GetPaiementUrl()
+        public Task<PaiementResult<string>> GetPaiementUrl(decimal amount, int transactionId, string signature)
         {
             throw new Exception();
         }

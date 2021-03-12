@@ -34,7 +34,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 }
 
                 var url = $"{_paiementOptions.PaiementUrl}?cpm_amount={amount.ToString()}&cpm_currency={_paiementOptions.Currency.ToString()}&cpm_site_id={_paiementOptions.SiteID}";
-                url += $"&cpm_trans_id={transactionId.ToString("yyyy-MM-dd HH:mm:ss")}&cpm_trans_date={DateTime.Now.ToString()}&cpm_payment_config={_paiementOptions.PaymentConfiguration}";
+                url += $"&cpm_trans_id={transactionId.ToString()}&cpm_trans_date={DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}&cpm_payment_config={_paiementOptions.PaymentConfiguration}";
                 url += $"&cpm_page_action={_paiementOptions.PageAction}&cpm_version={_paiementOptions.ApiVersion}&cpm_language={_paiementOptions.Language}";
                 url += $"&cpm_designation=Paiement Rotary&cpm_custom={userId}&apikey={_paiementOptions.ApiKey}";
                 url += $"&signature={signature.Replace("\"", "")}&notify_url={_paiementOptions.NotificationUrl}";

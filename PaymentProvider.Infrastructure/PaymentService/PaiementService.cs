@@ -100,7 +100,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 }
                 else
                 {
-                    return new PaiementResult<string>() { ResultCode = StatusCode.Failed,};
+                    return new PaiementResult<string>() { ResultCode = StatusCode.Failed, Message = res.ReasonPhrase};
                 }
             }
             catch (Exception ex)
@@ -137,7 +137,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
                 }
                 else
                 {
-                    return new PaiementResult<StatutPayment>() { ResultCode = StatusCode.Failed, };
+                    return new PaiementResult<StatutPayment>() { ResultCode = StatusCode.Failed, Message = res.ReasonPhrase };
                 }
             }
             catch (Exception ex)

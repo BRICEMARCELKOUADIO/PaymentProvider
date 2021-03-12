@@ -16,9 +16,9 @@ namespace PaymentProvider.Infrastructure.PaymentService
     {
         private readonly PaiementOptions _paiementOptions;
 
-        public PaiementService(PaiementOptions paiementOptions)
+        public PaiementService(IOptions<PaiementOptions> paiementOptions)
         {
-            _paiementOptions = paiementOptions ?? throw new ArgumentNullException(nameof(paiementOptions));
+            _paiementOptions = paiementOptions.Value ?? throw new ArgumentNullException(nameof(paiementOptions));
         }
 
         public PaiementResult<string> GetPaiementUrl(decimal amount, int transactionId, string signature, string userId)

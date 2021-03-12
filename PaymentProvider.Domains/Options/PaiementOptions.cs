@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PaymentProvider.Domains.Options
 {
-    public class PaiementOptions
+    public class PaiementOptions : IOptions<PaiementOptions>
     {
         [JsonProperty("SiteID")]
         public string SiteID { get; set; }
@@ -45,5 +45,7 @@ namespace PaymentProvider.Domains.Options
 
         [JsonProperty("PhonePrefix")]
         public string PhonePrefix { get; set; }
+
+        public PaiementOptions Value => this;
     }
 }

@@ -47,11 +47,11 @@ namespace PaymentProvider.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetPaimentUrlAsync(decimal amount, int transactionId, string signature)
+        public async Task<IActionResult> GetPaimentUrlAsync(decimal amount, int transactionId, string signature, string userId)
         {
             try
             {
-                var response = await _paiement.GetPaiementUrl(amount, transactionId, signature);
+                var response = await Task.FromResult(_paiement.GetPaiementUrl(amount, transactionId, signature, userId));
 
                 if (response.ResultCode != 0)
                 {

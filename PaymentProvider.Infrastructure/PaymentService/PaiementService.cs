@@ -25,7 +25,7 @@ namespace PaymentProvider.Infrastructure.PaymentService
         {
             try
             {
-                if (amount < 100 || transactionId == 0 || string.IsNullOrEmpty(signature))
+                if (amount < 100 || transactionId <= 0 || string.IsNullOrEmpty(signature))
                 {
                     return new PaiementResult<string>()
                     {
@@ -54,6 +54,16 @@ namespace PaymentProvider.Infrastructure.PaymentService
         {
             try
             {
+
+                if (amount < 100 || transactionId <= 0)
+                {
+                    return new PaiementResult<string>()
+                    {
+                        ResultCode = StatusCode.Failed,
+                        Response = "MINIMUM REQUIRED FIELDS"
+                    };
+                }
+
                 var client = new HttpClient();
 
                 var paiementData = new List<KeyValuePair<string, string>>();
